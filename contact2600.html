@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Electrolize&family=Iceland&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23000" width="100" height="100"/><circle cx="10" cy="10" r="1" fill="%23003300" opacity="0.3"/><circle cx="30" cy="40" r="1" fill="%23003300" opacity="0.3"/><circle cx="60" cy="20" r="1" fill="%23003300" opacity="0.3"/></svg>');
+            font-family: 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff0088;
+        }
+        
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #001a00;
+            border: 3px solid #00ff00;
+            padding: 40px;
+            box-shadow: 
+                0 0 20px #00ff00,
+                0 0 40px #00ff0066,
+                inset 0 0 20px #00ff0033;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, transparent 24%, #00ff0012 25%, #00ff0012 26%, transparent 27%, transparent 74%, #00ff0012 75%, #00ff0012 76%, transparent 77%, transparent);
+            background-size: 100% 50px;
+            animation: scanlines 8s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes scanlines {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 50px;
+            }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ascii-header {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.2;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            white-space: pre;
+            animation: flicker 0.15s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+                color: #00ff00;
+            }
+            20%, 24%, 55% {
+                text-shadow: 0 0 5px #00ff00;
+                color: #00aa00;
+            }
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2.5em;
+            margin: 20px 0 30px 0;
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff0088;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            min-height: 1em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            display: none;
+        }
+        
+        label {
+            display: block;
+            font-family: 'Electrolize', sans-serif;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            letter-spacing: 1px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1em;
+            border-radius: 3px;
+            box-shadow: 0 0 10px #00ff0044, inset 0 0 10px #00ff0022;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: #00aa00;
+            opacity: 0.7;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff44, inset 0 0 10px #00ffff22;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
+            border: 2px solid #00ffff;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff0066;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #00aaff);
+            border-color: #00ff00;
+            box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff88;
+            transform: scale(1.02);
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .ascii-header {
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="ascii-header">
+    ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗
+   ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝
+   ██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║        ██║   
+   ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║        ██║   
+   ╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╗   ██║   
+    ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝   
+            </div>
+            
+            <h1>☢️ CONTACT ME ☢️</h1>
+            
+            <form>
+                <div class="form-group">
+                    <label for="name">→ NAME</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Enter your name..." 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">→ EMAIL</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="your@email.com" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">→ MESSAGE</label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        placeholder="Type your message here..." 
+                        required
+                    ></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">⚡ TRANSMIT SIGNAL ⚡</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Baud Rate Throttling Simulation
+        class BaudRateSimulator {
+            constructor(baudRate = 9600) {
+                this.baudRate = baudRate;
+                this.bitsPerCharacter = 10;
+                this.delayPerChar = (this.bitsPerCharacter / this.baudRate) * 1000;
+            }
+            
+            async typeText(element, text, speed = 1) {
+                element.textContent = '';
+                for (let char of text) {
+                    element.textContent += char;
+                    await new Promise(resolve => setTimeout(resolve, this.delayPerChar / speed));
+                }
+            }
+            
+            setBaudRate(rate) {
+                this.baudRate = rate;
+                this.delayPerChar = (this.bitsPerCharacter / this.baudRate) * 1000;
+            }
+        }
+        
+        // Initialize simulator at 1200 baud for authentic feel
+        const simulator = new BaudRateSimulator(1200);
+        
+        // Create baud rate display
+        const baudDisplay = document.createElement('div');
+        baudDisplay.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            border: 2px solid #00ff00;
+            padding: 15px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            font-size: 0.9em;
+            z-index: 1000;
+            box-shadow: 0 0 15px #00ff00;
+            border-radius: 3px;
+        `;
+        baudDisplay.id = 'baud-display';
+        document.body.appendChild(baudDisplay);
+        
+        // Connection indicator
+        const connectionIndicator = document.createElement('div');
+        connectionIndicator.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            z-index: 1000;
+        `;
+        const ledIndicator = document.createElement('div');
+        ledIndicator.style.cssText = `
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff00;
+            animation: pulse 1s infinite;
+        `;
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff0088; }
+                50% { box-shadow: 0 0 5px #00ff00; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        connectionIndicator.appendChild(ledIndicator);
+        connectionIndicator.appendChild(document.createTextNode('CONNECTED'));
+        document.body.appendChild(connectionIndicator);
+        
+        // Update baud rate display
+        function updateBaudDisplay() {
+            const rates = [
+                { baud: 1200, label: '1200 BAUD (DIAL-UP)' },
+                { baud: 2400, label: '2400 BAUD (TURBO)' },
+                { baud: 9600, label: '9600 BAUD (FAST)' },
+                { baud: 56000, label: '56K BAUD (BLAZING)' }
+            ];
+            
+            let displayText = `BAUD: ${simulator.baudRate}\n`;
+            displayText += '━'.repeat(25) + '\n';
+            rates.forEach(r => {
+                const marker = simulator.baudRate === r.baud ? '► ' : '  ';
+                displayText += marker + r.label + '\n';
+            });
+            
+            baudDisplay.textContent = displayText;
+            
+            // Add click to cycle baud rates
+            baudDisplay.style.cursor = 'pointer';
+            baudDisplay.onclick = cycleBaudRate;
+        }
+        
+        function cycleBaudRate() {
+            const rates = [1200, 2400, 9600, 56000];
+            const currentIndex = rates.indexOf(simulator.baudRate);
+            const nextIndex = (currentIndex + 1) % rates.length;
+            simulator.setBaudRate(rates[nextIndex]);
+            updateBaudDisplay();
+            
+            // Reset form animation
+            animatePageLoad();
+        }
+        
+        // Download progress bar
+        function showTransferProgress() {
+            const progressBar = document.createElement('div');
+            progressBar.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                width: 200px;
+                background: #000;
+                border: 2px solid #00ff00;
+                padding: 10px;
+                border-radius: 3px;
+                z-index: 1000;
+            `;
+            
+            const label = document.createElement('div');
+            label.style.cssText = `
+                font-family: 'Share Tech Mono', monospace;
+                color: #00ff00;
+                font-size: 0.8em;
+                margin-bottom: 5px;
+                text-shadow: 0 0 10px #00ff00;
+            `;
+            label.textContent = 'TRANSFER RATE:';
+            
+            const bar = document.createElement('div');
+            bar.style.cssText = `
+                width: 100%;
+                height: 15px;
+                background: #001a00;
+                border: 1px solid #00ff00;
+                position: relative;
+                overflow: hidden;
+            `;
+            
+            const fill = document.createElement('div');
+            fill.style.cssText = `
+                height: 100%;
+                background: linear-gradient(90deg, #00ff00, #00ffff);
+                width: 0%;
+                box-shadow: 0 0 10px #00ff00;
+            `;
+            
+            progressBar.appendChild(label);
+            progressBar.appendChild(bar);
+            bar.appendChild(fill);
+            document.body.appendChild(progressBar);
+            
+            // Simulate transfer
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                fill.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => progressBar.remove(), 1000);
+                }
+            }, 300);
+        }
+        
+        // Animate page load with baud rate simulation
+        async function animatePageLoad() {
+            // Clear existing content
+            const header = document.querySelector('.ascii-header');
+            const h1 = document.querySelector('h1');
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            // Type out ASCII header
+            await simulator.typeText(header, header.textContent, 2);
+            
+            // Type out heading
+            await simulator.typeText(h1, h1.textContent);
+            
+            // Show form elements one by one
+            for (let group of formGroups) {
+                group.style.opacity = '0';
+                group.style.display = 'block';
+                
+                // Fade in
+                await new Promise(resolve => {
+                    let opacity = 0;
+                    const fadeInterval = setInterval(() => {
+                        opacity += 0.1;
+                        group.style.opacity = opacity;
+                        if (opacity >= 1) {
+                            clearInterval(fadeInterval);
+                            resolve();
+                        }
+                    }, 30);
+                });
+                
+                // Type label
+                const label = group.querySelector('label');
+                await simulator.typeText(label, label.textContent);
+                
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // Animate button
+            const button = document.querySelector('.submit-btn');
+            button.style.opacity = '0';
+            let opacity = 0;
+            const fadeInterval = setInterval(() => {
+                opacity += 0.1;
+                button.style.opacity = opacity;
+                if (opacity >= 1) clearInterval(fadeInterval);
+            }, 30);
+            
+            showTransferProgress();
+        }
+        
+        // Start animation on page load
+        window.addEventListener('load', () => {
+            updateBaudDisplay();
+            animatePageLoad();
+        });
+        
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Show "uploading" effect
+            const btn = document.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ UPLOADING...';
+            btn.disabled = true;
+            
+            showTransferProgress();
+            
+            setTimeout(() => {
+                window.location.href = `mailto:${email}?subject=Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
